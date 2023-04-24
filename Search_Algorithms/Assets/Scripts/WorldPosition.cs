@@ -5,10 +5,11 @@ using UnityEngine.Tilemaps;
 
 public class WorldPosition : MonoBehaviour
 {
-    public Tilemap tilemap;
-    public Grid grid;
-    public float cellSize;
-    public ScanArea Scan;
+    [SerializeField] ScanArea Scan;
+    [SerializeField] Grid grid;
+    [SerializeField] Tilemap tilemap;
+    [SerializeField] float cellSize;
+    [SerializeField] float scanTime;
 
     private void Update()
     {
