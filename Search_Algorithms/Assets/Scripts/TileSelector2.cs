@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TileSelector : MonoBehaviour
+public class TileSelector2 : MonoBehaviour
 {
     [SerializeField] Camera main;
     public Tilemap tileMap;
@@ -14,11 +14,11 @@ public class TileSelector : MonoBehaviour
     private Dictionary<Tilemap, Vector3Int> _origin = new Dictionary<Tilemap, Vector3Int>();
     private Dictionary<Tilemap, Vector3Int> _goal = new Dictionary<Tilemap, Vector3Int>();
 
-    public ScanArea scanArea;
+    public Dijkstra scanArea;
 
     private void Start()
     {
-        _previousPosition[tileMap] = new Vector3Int(-1, -1, 0); 
+        _previousPosition[tileMap] = new Vector3Int(-1, -1, 0);
     }
 
 
@@ -28,11 +28,11 @@ public class TileSelector : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            DetectTileClick(isOrigin : true);
+            DetectTileClick(isOrigin: true);
         }
         if (Input.GetMouseButtonDown(1))
         {
-            DetectTileClick(isOrigin : false);
+            DetectTileClick(isOrigin: false);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -52,7 +52,7 @@ public class TileSelector : MonoBehaviour
 
         if (tileMap.HasTile(tilePosition))
         {
-           tileMap.SetTransformMatrix(tilePosition, Matrix4x4.TRS(offset, Quaternion.Euler(0, 0, 0), Vector3.one));
+            tileMap.SetTransformMatrix(tilePosition, Matrix4x4.TRS(offset, Quaternion.Euler(0, 0, 0), Vector3.one));
             tileMap.SetTransformMatrix(_previousPosition[tileMap], Matrix4x4.identity);
 
             _previousPosition[tileMap] = tilePosition;
@@ -86,7 +86,7 @@ public class TileSelector : MonoBehaviour
     private void StartFlooFill()
     {
         scanArea.Origin = _origin[tileMap];
-        scanArea.Goal= _goal[tileMap];
+        scanArea.Goal = _goal[tileMap];
         scanArea.tileMap = tileMap;
         scanArea.visitedTile = originTile;
         scanArea.pathTile = destinyTile;

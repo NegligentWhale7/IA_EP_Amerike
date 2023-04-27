@@ -283,7 +283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1210630846}
-  - component: {fileID: 1210630847}
+  - component: {fileID: 1210630845}
   m_Layer: 0
   m_Name: TileManager
   m_TagString: Untagged
@@ -291,6 +291,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1210630845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210630844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 072a9503544b5ee4ca7843a4669ab2cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  main: {fileID: 519420031}
+  tileMap: {fileID: 1298360817}
+  offset: {x: 0, y: 0.03, z: 0}
+  originTile: {fileID: 11400000, guid: 701a0a8eafe38aa408a70c7d04495f5c, type: 2}
+  destinyTile: {fileID: 11400000, guid: 4ad598b060e31ab41aa9760d61902423, type: 2}
+  scanArea: {fileID: 754426310}
 --- !u!4 &1210630846
 Transform:
   m_ObjectHideFlags: 0
@@ -306,23 +324,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1210630847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210630844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec44e67e6fd1393449f0e1276aaca8fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Scan: {fileID: 754426310}
-  grid: {fileID: 754426308}
-  tilemap: {fileID: 1298360817}
-  cellSize: 1
-  scanTime: 1e-25
 --- !u!1 &1298360814
 GameObject:
   m_ObjectHideFlags: 0
