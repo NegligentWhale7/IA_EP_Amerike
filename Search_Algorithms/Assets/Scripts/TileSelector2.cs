@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -15,6 +16,8 @@ public class TileSelector2 : MonoBehaviour
     private Dictionary<Tilemap, Vector3Int> _goal = new Dictionary<Tilemap, Vector3Int>();
 
     public Dijkstra scanArea;
+    public HeuristicSearch search;
+    [SerializeField] bool isHeusristic; 
 
     private void Start()
     {
@@ -37,7 +40,8 @@ public class TileSelector2 : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartFlooFill();
+            if (!isHeusristic) StartFlooFill();
+            if (isHeusristic) StartHeuristic();
         }
     }
 
@@ -92,5 +96,16 @@ public class TileSelector2 : MonoBehaviour
         scanArea.pathTile = destinyTile;
 
         StartCoroutine(scanArea.FloodField(0.0001f));
+    }
+
+    private void StartHeuristic()
+    {
+        search.Origin = _origin[tileMap];
+        search.Goal = _goal[tileMap];
+        search.tileMap = tileMap;
+        search.visitedTile = originTile;
+        search.pathTile = destinyTile;
+
+        StartCoroutine(search.FloodField(0.0001f));
     }
 }
