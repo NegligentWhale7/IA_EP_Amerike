@@ -14,7 +14,7 @@ public class TileSelector : MonoBehaviour
     private Dictionary<Tilemap, Vector3Int> _origin = new Dictionary<Tilemap, Vector3Int>();
     private Dictionary<Tilemap, Vector3Int> _goal = new Dictionary<Tilemap, Vector3Int>();
 
-    public ScanArea scanArea;
+    public BreadthSearchFirst scanArea;
 
     private void Start()
     {

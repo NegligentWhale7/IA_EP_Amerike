@@ -217,7 +217,6 @@ GameObject:
   m_Component:
   - component: {fileID: 754426309}
   - component: {fileID: 754426308}
-  - component: {fileID: 754426310}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -255,25 +254,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &754426310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754426307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee998568c0b275941868c04c2392cf25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileMap: {fileID: 1298360817}
-  DelayTime: 1e-25
-  TBase: {fileID: 11400000, guid: 5c6a45196354a804589dc5367cf9407e, type: 2}
-  Origin: {x: 0, y: 0, z: 0}
-  Goal: {x: 0, y: 0, z: 0}
-  visitedTile: {fileID: 11400000, guid: c3694a7046efc794d81a2a7f15995f76, type: 2}
-  pathTile: {fileID: 11400000, guid: c02a02d684f9602489e9409ac6f9aae1, type: 2}
 --- !u!1 &1210630844
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1210630846}
   - component: {fileID: 1210630847}
+  - component: {fileID: 1210630848}
   m_Layer: 0
   m_Name: TileManager
   m_TagString: Untagged
@@ -315,14 +296,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 1210630844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec44e67e6fd1393449f0e1276aaca8fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 838617fc1f2648047a2ce275822b663c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Scan: {fileID: 754426310}
-  grid: {fileID: 754426308}
-  tilemap: {fileID: 1298360817}
-  cellSize: 1
-  scanTime: 1e-25
+  main: {fileID: 519420031}
+  tileMap: {fileID: 1298360817}
+  offset: {x: 0, y: 0.03, z: 0}
+  originTile: {fileID: 11400000, guid: c3694a7046efc794d81a2a7f15995f76, type: 2}
+  destinyTile: {fileID: 11400000, guid: 701a0a8eafe38aa408a70c7d04495f5c, type: 2}
+  scanArea: {fileID: 1210630848}
+  earlyE: {fileID: 0}
+  dijkstraArea: {fileID: 0}
+  heuristicSearch: {fileID: 0}
+  starArea: {fileID: 0}
+  _selectorType: 0
+--- !u!114 &1210630848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210630844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f2b402ebd52b048857ba6e63a32501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileMap: {fileID: 1298360817}
+  DelayTime: 1e-13
+  TBase: {fileID: 11400000, guid: c02a02d684f9602489e9409ac6f9aae1, type: 2}
+  Origin: {x: 0, y: 0, z: 0}
+  Goal: {x: 0, y: 0, z: 0}
+  visitedTile: {fileID: 11400000, guid: 5dc3964c6cdc3dc45b78c828367c95ad, type: 2}
+  pathTile: {fileID: 11400000, guid: 8ae33c0111eaf884982ddeb23d7e6ed3, type: 2}
 --- !u!1 &1298360814
 GameObject:
   m_ObjectHideFlags: 0

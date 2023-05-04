@@ -1,26 +1,22 @@
-using ESarkis;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class HeuristicSearch : MonoBehaviour
+public class BreadthSearchFirst : MonoBehaviour
 {
-    public Vector3 Origin { get; set; }
-    public Vector3 Goal { get; set; }
-
     public Tilemap tileMap;
     public float DelayTime;
     public TileBase TBase;
 
-    private PriorityQueue<Vector3> _frontier = new PriorityQueue<Vector3>();
+    public Vector3 Origin;
+    public Vector3 Goal;
+    private Queue<Vector3> _frontier = new Queue<Vector3>();
     private Dictionary<Vector3, Vector3> _cameFrom = new Dictionary<Vector3, Vector3>();
-    private Dictionary<Vector3, double> _costSoFar = new Dictionary<Vector3, double>();
     public TileBase visitedTile, pathTile;
 
-    private bool isEarlyExit = false;
-
-
+    
     public void StartScan()
     {
         StartCoroutine(FloodField(DelayTime));
@@ -29,43 +25,23 @@ public class HeuristicSearch : MonoBehaviour
 
     public IEnumerator FloodField(float time)
     {
-        _frontier.Enqueue(Origin, 0);
+        _frontier.Enqueue(Origin);
         _cameFrom[Origin] = Vector3.zero;
-        _costSoFar[Origin] = 0;
 
-        while (_frontier.Count > 0 && !isEarlyExit)
+        while(_frontier.Count > 0)
         {
             Vector3 current = _frontier.Dequeue();
             foreach (Vector3 next in GetNeighbors(current))
             {
-                double newCost = _costSoFar[current] + GetCost(next);
-                if (next == Goal) { isEarlyExit = true; yield return null; }
-                if (!_costSoFar.ContainsKey(next) || newCost < _costSoFar[next])
-                {
+                if (!_cameFrom.ContainsKey(next))
+                {                    
                     yield return new WaitForSeconds(time);
-                    _costSoFar[next] = GetHeuristic(Goal, next);
-                    _frontier.Enqueue(next, newCost);
+                    _frontier.Enqueue(next);
                     _cameFrom[next] = current;
                 }
             }
         }
         DrawPath(Goal);
-    }
-
-
-    private double GetCost(Vector3 next)
-    {
-        var nextTile = tileMap.GetTile(new Vector3Int((int)next.x, (int)next.y, (int)next.z));
-        double cost = nextTile.name switch
-        {
-            "isometric_angled_pixel_0009" => 50,
-            "isometric_angled_pixel_0022" => 20,
-            "isometric_angled_pixel_0019" => 3,
-            "isometric_angled_pixel_0015" => 2,
-            _ => 1
-        };
-
-        return cost;
     }
 
 
@@ -77,7 +53,7 @@ public class HeuristicSearch : MonoBehaviour
         Vector3Int neighborU = currentInt + Vector3Int.up;
         Vector3Int neighborL = currentInt + Vector3Int.left;
         Vector3Int neighborR = currentInt + Vector3Int.right;
-
+        
         ValidateCoord(neighborR, neighbors);
         ValidateCoord(neighborL, neighbors);
         ValidateCoord(neighborU, neighbors);
@@ -94,15 +70,8 @@ public class HeuristicSearch : MonoBehaviour
         if (_frontier.Contains(nextInt)) { return; }
 
         coordList.Add(nextInt);
-        // tileMap.SetTile(nextInt, TBase);
+        tileMap.SetTile(nextInt, TBase);
     }
-
-
-    private float Heuristic(Vector3 a, Vector3 b)
-    {
-        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
-    }
-
 
     void DrawPath(Vector3 goal)
     {
@@ -113,11 +82,5 @@ public class HeuristicSearch : MonoBehaviour
             tileMap.SetTile(currentInt, pathTile);
             current = _cameFrom[current];
         }
-    }
-
-
-    float GetHeuristic(Vector3 a, Vector3 b)
-    {
-        return Vector3.Distance(a, b);
     }
 }

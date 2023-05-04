@@ -281,8 +281,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1210630846}
-  - component: {fileID: 1210630847}
   - component: {fileID: 1210630848}
+  - component: {fileID: 1210630849}
   m_Layer: 0
   m_Name: TileManager
   m_TagString: Untagged
@@ -305,23 +305,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1210630847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210630844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6e8e3fa10f6d564894c9bdf886f11e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileMap: {fileID: 1298360817}
-  DelayTime: 1e-12
-  TBase: {fileID: 11400000, guid: 5c6a45196354a804589dc5367cf9407e, type: 2}
-  visitedTile: {fileID: 11400000, guid: 5dc3964c6cdc3dc45b78c828367c95ad, type: 2}
-  pathTile: {fileID: 11400000, guid: 8ae33c0111eaf884982ddeb23d7e6ed3, type: 2}
 --- !u!114 &1210630848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,11 +323,27 @@ MonoBehaviour:
   originTile: {fileID: 11400000, guid: 7ff0fe0264c8de44aa815ea36496d0d8, type: 2}
   destinyTile: {fileID: 11400000, guid: 4ad598b060e31ab41aa9760d61902423, type: 2}
   scanArea: {fileID: 0}
-  earlyE: {fileID: 0}
-  dijkstraArea: {fileID: 1210630847}
+  dijkstraArea: {fileID: 0}
   heuristicSearch: {fileID: 0}
-  starArea: {fileID: 0}
-  _selectorType: 2
+  starArea: {fileID: 1210630849}
+  _selectorType: 4
+--- !u!114 &1210630849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210630844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c82fbe71bcb9ef34e8e4572a2c08a157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileMap: {fileID: 1298360817}
+  DelayTime: 1e-12
+  TBase: {fileID: 11400000, guid: 5c6a45196354a804589dc5367cf9407e, type: 2}
+  visitedTile: {fileID: 11400000, guid: 5dc3964c6cdc3dc45b78c828367c95ad, type: 2}
+  pathTile: {fileID: 11400000, guid: 8ae33c0111eaf884982ddeb23d7e6ed3, type: 2}
 --- !u!1 &1298360814
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +356,7 @@ GameObject:
   - component: {fileID: 1298360817}
   - component: {fileID: 1298360816}
   m_Layer: 0
-  m_Name: Suelo_Base
+  m_Name: A*
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

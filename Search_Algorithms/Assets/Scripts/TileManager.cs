@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TileSelector2 : MonoBehaviour
+public class TileManager : MonoBehaviour
 {
     [SerializeField] Camera main;
     public Tilemap tileMap;
@@ -15,9 +15,14 @@ public class TileSelector2 : MonoBehaviour
     private Dictionary<Tilemap, Vector3Int> _origin = new Dictionary<Tilemap, Vector3Int>();
     private Dictionary<Tilemap, Vector3Int> _goal = new Dictionary<Tilemap, Vector3Int>();
 
-    public Dijkstra scanArea;
-    public HeuristicSearch search;
-    [SerializeField] bool isHeusristic; 
+    [SerializeField] BreadthSearchFirst scanArea;
+    [SerializeField] EarlyExit earlyE;
+    [SerializeField] Dijkstra dijkstraArea;
+    [SerializeField] HeuristicSearch heuristicSearch;
+    [SerializeField] Star starArea;
+
+    private enum SelectorType { FloodField, EarlyExit, Dijkstra, Heuristic, Star }
+    [SerializeField] private SelectorType _selectorType;
 
     private void Start()
     {
@@ -40,8 +45,24 @@ public class TileSelector2 : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!isHeusristic) StartFlooFill();
-            if (isHeusristic) StartHeuristic();
+            switch (_selectorType)
+            {
+                case SelectorType.FloodField:
+                    StartFlooFill();
+                    break;
+                case SelectorType.EarlyExit:
+                    StartEarlyExitScan();
+                    break;
+                case SelectorType.Dijkstra: 
+                    StartDijkstra();
+                    break;
+                case SelectorType.Heuristic:
+                    StartHeuristic();
+                    break;
+                case SelectorType.Star:
+                    StartStar();
+                    break;
+            }
         }
     }
 
@@ -98,14 +119,49 @@ public class TileSelector2 : MonoBehaviour
         StartCoroutine(scanArea.FloodField(0.0001f));
     }
 
+    private void StartEarlyExitScan()
+    {
+        earlyE.Origin = _origin[tileMap];
+        earlyE.Goal = _goal[tileMap];
+        earlyE.tileMap = tileMap;
+        earlyE.visitedTile = originTile;
+        earlyE.pathTile = destinyTile;
+
+        StartCoroutine(earlyE.FloodField(0.0001f));
+    }
+
+    private void StartDijkstra()
+    {
+        dijkstraArea.Origin = _origin[tileMap];
+        dijkstraArea.Goal = _goal[tileMap];
+        dijkstraArea.tileMap = tileMap;
+        dijkstraArea.visitedTile = originTile;
+        dijkstraArea.pathTile = destinyTile;
+
+        StartCoroutine(dijkstraArea.FloodField(0.0001f));
+    }
+
+
     private void StartHeuristic()
     {
-        search.Origin = _origin[tileMap];
-        search.Goal = _goal[tileMap];
-        search.tileMap = tileMap;
-        search.visitedTile = originTile;
-        search.pathTile = destinyTile;
+        heuristicSearch.Origin = _origin[tileMap];
+        heuristicSearch.Goal = _goal[tileMap];
+        heuristicSearch.tileMap = tileMap;
+        heuristicSearch.visitedTile = originTile;
+        heuristicSearch.pathTile = destinyTile;
 
-        StartCoroutine(search.FloodField(0.0001f));
+        StartCoroutine(heuristicSearch.FloodField(0.0001f));
+    }
+
+
+    private void StartStar()
+    {
+        starArea.Origin = _origin[tileMap];
+        starArea.Goal = _goal[tileMap];
+        starArea.tileMap = tileMap;
+        starArea.visitedTile = originTile;
+        starArea.pathTile = destinyTile;
+
+        StartCoroutine(starArea.FloodField(0.0001f));
     }
 }

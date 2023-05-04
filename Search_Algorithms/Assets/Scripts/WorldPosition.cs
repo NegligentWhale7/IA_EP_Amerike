@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class WorldPosition : MonoBehaviour
 {
-    [SerializeField] ScanArea Scan;
+    [SerializeField] BreadthSearchFirst Scan;
     [SerializeField] Grid grid;
     [SerializeField] Tilemap tilemap;
     [SerializeField] float cellSize;
