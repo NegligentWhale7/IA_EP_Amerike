@@ -8,7 +8,7 @@ public class TileManager : MonoBehaviour
 {
     [SerializeField] Camera main;
     public Tilemap tileMap;
-    public Vector3 offset = new Vector3(0f, 0.03f, 0f);
+    public Vector3 offset = new Vector3(0f, 0.02f, 0f);
     public TileBase originTile, destinyTile;
 
     private Dictionary<Tilemap, Vector3Int> _previousPosition = new Dictionary<Tilemap, Vector3Int>();
