@@ -1,25 +1,27 @@
 using ESarkis;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float maxSteps;
+    [SerializeField] Tilemap deMap;
     public Vector3 Origin { get; set; }
     public Vector3 Goal { get; set; }
-
     public Tilemap tileMap;
     public float DelayTime;
     public TileBase TBase;
+    public TileBase visitedTile, pathTile;
 
     private PriorityQueue<Vector3> _frontier = new PriorityQueue<Vector3>();
     private Dictionary<Vector3, Vector3> _cameFrom = new Dictionary<Vector3, Vector3>();
     private Dictionary<Vector3, double> _costSoFar = new Dictionary<Vector3, double>();
-    public TileBase visitedTile, pathTile;
+    private Dictionary<Vector3Int, TileBase> _oldTile = new Dictionary<Vector3Int, TileBase>();
+    private float _steps;
 
-    float _steps;
 
     public void StartScan()
     {
@@ -46,11 +48,12 @@ public class Player : MonoBehaviour
                     _costSoFar[next] = newCost;
                     _frontier.Enqueue(next, newCost);
                     _cameFrom[next] = current;
+                    _steps++;
                 }
             }
-            _steps++;
         }
-        DrawPath(Goal);
+        
+        //DrawPath(Goal);
     }
 
 
@@ -59,9 +62,10 @@ public class Player : MonoBehaviour
         var nextTile = tileMap.GetTile(new Vector3Int((int)next.x, (int)next.y, (int)next.z));
         double cost = nextTile.name switch
         {
-            "isometric_angled_pixel_0009" => 50,
-            "isometric_angled_pixel_0022" => 20,
-            "isometric_angled_pixel_0019" => 3,
+            "isometric_angled_pixel_0036" => 5000,
+            "isometric_angled_pixel_0059" => 500,
+            "isometric_angled_pixel_0035" => 20,
+            "isometric_angled_pixel_0043" => 3,
             "isometric_angled_pixel_0015" => 2,
             _ => 1
         };
@@ -95,18 +99,39 @@ public class Player : MonoBehaviour
         if (_frontier.Contains(nextInt)) { return; }
 
         coordList.Add(nextInt);
-        tileMap.SetTile(nextInt, TBase);
+        deMap.SetTile(nextInt, TBase);
+        //tileMap.SetTile(nextInt, TBase);
     }
 
 
-    void DrawPath(Vector3 goal)
+    public void DrawPath(Vector3 goal)
     {
+        if (_oldTile.Count > 0)
+        {
+            Debug.Log("0");
+            Vector3 currentReturn = Origin;
+
+            for (int i = _oldTile.Count - 1; i >= 0; i--)
+            {
+                Vector3Int currentint = _oldTile.ElementAt(i).Key;
+                TileBase tile = _oldTile.ElementAt(i).Value;
+                deMap.SetTile(currentint, tile); // usar el tile original en lugar de pathtile
+            }
+        }
+
         Vector3 current = goal;
+
         while (current != Origin)
         {
             Vector3Int currentInt = new Vector3Int((int)current.x, (int)current.y, (int)current.z);
-            tileMap.SetTile(currentInt, pathTile);
+            if (!_oldTile.ContainsKey(currentInt))
+            {
+                _oldTile.Add(currentInt, deMap.GetTile(currentInt));
+            }
+            if (!deMap.HasTile(currentInt)) { return; }
+            deMap.SetTile(currentInt, pathTile);
             current = _cameFrom[current];
+            
         }
     }
 }

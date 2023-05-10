@@ -19481,9 +19481,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f131929e7b65554f9c8ddf7da72173d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSteps: 40
+  maxSteps: 80
+  deMap: {fileID: 540146949}
   tileMap: {fileID: 1692038709}
-  DelayTime: 0.1
+  DelayTime: 0.0000001
   TBase: {fileID: 11400000, guid: 8261e14034d70614eac3614c7d80fe61, type: 2}
   visitedTile: {fileID: 11400000, guid: 747ef36a2dce1e34aaca055900d6beaa, type: 2}
   pathTile: {fileID: 11400000, guid: 15a984361b9f2014587306e7b8a856f4, type: 2}
@@ -19515,13 +19516,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   main: {fileID: 519420031}
+  grid: {fileID: 1734272385}
   tileMap: {fileID: 1692038709}
   offset: {x: 0, y: 0.02, z: 0}
   originTile: {fileID: 11400000, guid: 15a984361b9f2014587306e7b8a856f4, type: 2}
   destinyTile: {fileID: 11400000, guid: f57c21110b0143949ad2f1e87a0cd9d3, type: 2}
   scanArea: {fileID: 1800002811}
-  earlyE: {fileID: 0}
-  dijkstraArea: {fileID: 0}
-  heuristicSearch: {fileID: 0}
-  starArea: {fileID: 0}
-  _selectorType: 0
