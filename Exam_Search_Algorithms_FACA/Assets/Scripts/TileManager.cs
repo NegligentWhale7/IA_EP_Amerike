@@ -8,16 +8,25 @@ public class TileManager : MonoBehaviour
 {
     [SerializeField] Camera main;
     [SerializeField] Grid grid;
-    [SerializeField] Player scanArea;
     public Tilemap tileMap;
+    public Tilemap infantery;
+    public Tilemap tank;
+    public Tilemap reconocimiento;
+    public Tilemap Caballeria;
     public Vector3 offset = new Vector3(0f, 0.02f, 0f);
     public TileBase originTile, destinyTile;
+
+    [HideInInspector]
+    public TileBase tb;
 
     private Dictionary<Tilemap, Vector3Int> _previousPosition = new Dictionary<Tilemap, Vector3Int>();
     private Dictionary<Tilemap, Vector3Int> _origin = new Dictionary<Tilemap, Vector3Int>();
     private Dictionary<Tilemap, Vector3Int> _goal = new Dictionary<Tilemap, Vector3Int>();
-    private Vector3Int tilePosition;
-    private bool _isPlayerSelected = false;
+
+    [SerializeField] Infantery scanArea;
+
+    bool _isPlayerSelected = false;
+    Vector3Int tilePosition;
 
     private void Start()
     {
@@ -27,23 +36,54 @@ public class TileManager : MonoBehaviour
 
     private void Update()
     {
-        if (!_isPlayerSelected) SelectTile();
-        ManageTroupe();
-    }
+        if (!scanArea.IsPlayerSelected) SelectTile();
 
-
-    private void ManageTroupe()
-    {
-        
-
-        if (Input.GetMouseButtonDown(0) && !scanArea.IsPlayerSelected)
+        if (Input.GetMouseButtonDown(0))
         {
+            if (infantery.HasTile(tilePosition))
+            {
 
-            DetectTileClick(isOrigin: true);
-            scanArea.IsPlayerSelected = true;
-            ShowMovementArea();
+                scanArea.maxSteps = 10;
+                DetectTileClick(isOrigin: true);
+                scanArea.IsPlayerSelected = true;
+                ShowMovementArea();
+                DetectTileClick(isOrigin: false);
+
+            }
+
+            if (tank.HasTile(tilePosition))
+            {
+
+                scanArea.maxSteps = 50;
+                DetectTileClick(isOrigin: true);
+                scanArea.IsPlayerSelected = true;
+                ShowMovementArea();
+                DetectTileClick(isOrigin: false);
+
+            }
+
+            if (reconocimiento.HasTile(tilePosition))
+            {
+
+                scanArea.maxSteps = 60;
+                DetectTileClick(isOrigin: true);
+                scanArea.IsPlayerSelected = true;
+                ShowMovementArea();
+                DetectTileClick(isOrigin: false);
+
+            }
+
+            if (Caballeria.HasTile(tilePosition))
+            {
+
+                scanArea.maxSteps = 60;
+                DetectTileClick(isOrigin: true);
+                scanArea.IsPlayerSelected = true;
+                ShowMovementArea();
+                DetectTileClick(isOrigin: false);
+
+            }
         }
-
         if (Input.GetMouseButtonDown(1) && scanArea.IsPlayerSelected)
         {
             DetectTileClick(isOrigin: false);
@@ -57,7 +97,10 @@ public class TileManager : MonoBehaviour
             scanArea.IsPlayerSelected = false;
             scanArea.ClearTiles();
         }
+
     }
+
+
     private void SelectTile()
     {
         Vector3 mousePosition = main.ScreenToWorldPoint(Input.mousePosition);
@@ -91,7 +134,6 @@ public class TileManager : MonoBehaviour
         if (tileMap.HasTile(tilePosition))
         {
             var oldTile = tileMap.GetTile(tilePosition);
-            //tileMap.SetTile(tilePosition, newTile);
             selectedDictionary[tileMap] = tilePosition;
         }
     }
@@ -101,9 +143,8 @@ public class TileManager : MonoBehaviour
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int cellPosition = grid.WorldToCell(new Vector3(mousePosition.x, mousePosition.y, 0f));
         Vector3 worldPosition = grid.CellToWorld(cellPosition) + new Vector3(1 / 2f, 1 / 2f, 0f);
-        //Debug.Log("Clicked on cell " + cellPosition + " at position " + worldPosition);
+        Debug.Log("Clicked on cell " + cellPosition + " at position " + worldPosition);
         scanArea.Origin = cellPosition;
         scanArea.StartScan();
     }
-
 }

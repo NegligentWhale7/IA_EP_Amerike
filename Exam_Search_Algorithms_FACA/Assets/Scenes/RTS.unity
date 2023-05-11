@@ -553,7 +553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &894248552
 Transform:
   m_ObjectHideFlags: 0
@@ -688,7 +688,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -713,10 +713,10 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 3fc3e3f3ecb76ce4ea0696a6842e4f93, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 06a287cc97cb64df8a11af10f2352365, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 06a287cc97cb64df8a11af10f2352365, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 04562bc13a2407e40ae370dad404125b, type: 3}
   m_TileMatrixArray:
@@ -20179,6 +20179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1734272386}
   - component: {fileID: 1734272385}
+  - component: {fileID: 1734272387}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -20219,6 +20220,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1734272387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734272384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed0b5042300083346bd32fa8a7bc35e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSteps: 80
+  deMap: {fileID: 540146949}
+  offset: {x: 0, y: 0.15, z: 0}
+  tileMap: {fileID: 1692038709}
+  DelayTime: 0.00001
+  TBase: {fileID: 11400000, guid: 8261e14034d70614eac3614c7d80fe61, type: 2}
+  playerSprite: {fileID: 11400000, guid: a4da069403597c54a837d900e5f6651c, type: 2}
+  visitedTile: {fileID: 11400000, guid: 15a984361b9f2014587306e7b8a856f4, type: 2}
+  pathTile: {fileID: 11400000, guid: 15a984361b9f2014587306e7b8a856f4, type: 2}
+  IsPlayerSelected: 0
+  ts: {fileID: 1800002813}
+  _pathNodes: []
 --- !u!1 &1800002810
 GameObject:
   m_ObjectHideFlags: 0
@@ -20265,8 +20290,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   main: {fileID: 519420031}
   grid: {fileID: 1734272385}
-  scanArea: {fileID: 894248553}
   tileMap: {fileID: 1692038709}
+  infantery: {fileID: 1686129220}
+  tank: {fileID: 1684102025}
+  reconocimiento: {fileID: 800024327}
+  Caballeria: {fileID: 1432851908}
   offset: {x: 0, y: 0.02, z: 0}
   originTile: {fileID: 11400000, guid: 15a984361b9f2014587306e7b8a856f4, type: 2}
   destinyTile: {fileID: 11400000, guid: f57c21110b0143949ad2f1e87a0cd9d3, type: 2}
+  tb: {fileID: 0}
+  scanArea: {fileID: 1734272387}
