@@ -2,6 +2,7 @@ using ESarkis;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -9,12 +10,13 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float maxSteps;
     [SerializeField] Tilemap deMap;
-    public Vector3 Origin { get; set; }
-    public Vector3 Goal { get; set; }
     public Tilemap tileMap;
     public float DelayTime;
     public TileBase TBase;
     public TileBase visitedTile, pathTile;
+    public bool IsPlayerSelected = false;
+    public Vector3 Goal { get; set; }
+    public Vector3 Origin { get; set; }
 
     private PriorityQueue<Vector3> _frontier = new PriorityQueue<Vector3>();
     private Dictionary<Vector3, Vector3> _cameFrom = new Dictionary<Vector3, Vector3>();
@@ -52,8 +54,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        
-        //DrawPath(Goal);
     }
 
 
@@ -93,7 +93,8 @@ public class Player : MonoBehaviour
 
     private void ValidateCoord(Vector3 next, List<Vector3> coordList)
     {
-        Vector3Int nextInt = new Vector3Int((int)next.x, (int)next.y, (int)next.z);
+        Dictionary<Vector3Int, TileBase> _oldT = new Dictionary<Vector3Int, TileBase>();
+    Vector3Int nextInt = new Vector3Int((int)next.x, (int)next.y, (int)next.z);
         if (_cameFrom.ContainsValue(next)) { return; }
         if (!tileMap.HasTile(nextInt)) { return; }
         if (_frontier.Contains(nextInt)) { return; }
@@ -133,5 +134,17 @@ public class Player : MonoBehaviour
             current = _cameFrom[current];
             
         }
+    }
+
+
+    public void ClearTiles()
+    {
+        StopAllCoroutines();
+        deMap.ClearAllTiles();
+        _steps = 0;
+        _frontier.Clear();
+        _cameFrom.Clear();
+        _costSoFar.Clear();
+        _oldTile.Clear();
     }
 }

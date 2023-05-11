@@ -8,6 +8,7 @@ public class TileManager : MonoBehaviour
 {
     [SerializeField] Camera main;
     [SerializeField] Grid grid;
+    [SerializeField] Player scanArea;
     public Tilemap tileMap;
     public Vector3 offset = new Vector3(0f, 0.02f, 0f);
     public TileBase originTile, destinyTile;
@@ -15,11 +16,7 @@ public class TileManager : MonoBehaviour
     private Dictionary<Tilemap, Vector3Int> _previousPosition = new Dictionary<Tilemap, Vector3Int>();
     private Dictionary<Tilemap, Vector3Int> _origin = new Dictionary<Tilemap, Vector3Int>();
     private Dictionary<Tilemap, Vector3Int> _goal = new Dictionary<Tilemap, Vector3Int>();
-
-    [SerializeField] Player scanArea;
-
-    bool _isPlayerSelected = false;
-    Vector3Int tilePosition;
+    private Vector3Int tilePosition;
 
     private void Start()
     {
@@ -29,23 +26,29 @@ public class TileManager : MonoBehaviour
 
     private void Update()
     {
-        if (!_isPlayerSelected) SelectTile();
+        if (!scanArea.IsPlayerSelected) SelectTile();
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetMouseButtonDown(0) && !scanArea.IsPlayerSelected)
         {
+
             DetectTileClick(isOrigin: true);
-            _isPlayerSelected = true;
+            scanArea.IsPlayerSelected = true;
             ShowMovementArea();
         }
-        if (_isPlayerSelected) DetectTileClick(isOrigin: false);
-        if (_isPlayerSelected) scanArea.DrawPath(tilePosition);
+
+        if (Input.GetMouseButtonDown(1) && scanArea.IsPlayerSelected)
+        {
+                DetectTileClick(isOrigin: false);
+                scanArea.DrawPath(tilePosition);
+        }
+
+        if (scanArea.IsPlayerSelected && Input.GetKeyDown(KeyCode.Return)) { }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            _isPlayerSelected = false;
-
+            scanArea.IsPlayerSelected = false;
+            scanArea.ClearTiles();
         }
-        
     }
 
 
@@ -83,12 +86,6 @@ public class TileManager : MonoBehaviour
         {
             var oldTile = tileMap.GetTile(tilePosition);
             //tileMap.SetTile(tilePosition, newTile);
-
-            if (selectedDictionary.ContainsKey(tileMap))
-            {
-                //tileMap.SetTile(selectedDictionary[tileMap], oldTile);
-
-            }
             selectedDictionary[tileMap] = tilePosition;
         }
     }
@@ -98,7 +95,7 @@ public class TileManager : MonoBehaviour
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int cellPosition = grid.WorldToCell(new Vector3(mousePosition.x, mousePosition.y, 0f));
         Vector3 worldPosition = grid.CellToWorld(cellPosition) + new Vector3(1 / 2f, 1 / 2f, 0f);
-        Debug.Log("Clicked on cell " + cellPosition + " at position " + worldPosition);
+        //Debug.Log("Clicked on cell " + cellPosition + " at position " + worldPosition);
         scanArea.Origin = cellPosition;
         scanArea.StartScan();
     }
