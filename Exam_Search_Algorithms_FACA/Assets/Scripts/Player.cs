@@ -2,17 +2,18 @@ using ESarkis;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Threading.Tasks;
+
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float maxSteps;
-    [SerializeField] Tilemap deMap;
+    [SerializeField] Tilemap deMap, playerMap;
     public Tilemap tileMap;
     public float DelayTime;
-    public TileBase TBase;
+    public TileBase TBase, playerSprite;
     public TileBase visitedTile, pathTile;
     public bool IsPlayerSelected = false;
     public Vector3 Goal { get; set; }
@@ -23,7 +24,7 @@ public class Player : MonoBehaviour
     private Dictionary<Vector3, double> _costSoFar = new Dictionary<Vector3, double>();
     private Dictionary<Vector3Int, TileBase> _oldTile = new Dictionary<Vector3Int, TileBase>();
     private float _steps;
-
+    public List<Vector3Int> _pathNodes = new List<Vector3Int>();
 
     public void StartScan()
     {
@@ -107,8 +108,10 @@ public class Player : MonoBehaviour
 
     public void DrawPath(Vector3 goal)
     {
+
         if (_oldTile.Count > 0)
         {
+            _pathNodes.Clear();
             Debug.Log("0");
             Vector3 currentReturn = Origin;
 
@@ -116,7 +119,7 @@ public class Player : MonoBehaviour
             {
                 Vector3Int currentint = _oldTile.ElementAt(i).Key;
                 TileBase tile = _oldTile.ElementAt(i).Value;
-                deMap.SetTile(currentint, tile); // usar el tile original en lugar de pathtile
+                deMap.SetTile(currentint, tile); 
             }
         }
 
@@ -131,8 +134,44 @@ public class Player : MonoBehaviour
             }
             if (!deMap.HasTile(currentInt)) { return; }
             deMap.SetTile(currentInt, pathTile);
+            // playerMap.SetTile(currentInt, playerSprite);
+            _pathNodes.Add(currentInt);
             current = _cameFrom[current];
-            
+
+        }
+
+        
+    }
+
+    public void MovePlayer()
+    {
+        Vector3 current = Goal;
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int cellPosition = playerMap.WorldToCell(new Vector3(mousePosition.x, mousePosition.y, 0f));
+            Goal = cellPosition;
+            // current = _cameFrom[Goal];
+            Vector3Int currentInt = new Vector3Int((int)current.x, (int)current.y, (int)current.z);
+
+            int indexNodes = _pathNodes.Count - 1;
+            Vector3Int newVi = _pathNodes[indexNodes];
+            //  playerMap.SetTile(newVi, playerSprite);
+
+            Move();
+            //playerMap.SetTile(cellPosition, playerSprite);
+        
+    }
+
+
+    async void Move()
+    {
+        for (int i = _pathNodes.Count - 1; i >= 0; i--)
+        {
+            playerMap.SetTile(_pathNodes[i], playerSprite);
+            await Task.Delay(1000);
+            if (i != 0)
+            {
+                playerMap.ClearAllTiles();
+            }
         }
     }
 

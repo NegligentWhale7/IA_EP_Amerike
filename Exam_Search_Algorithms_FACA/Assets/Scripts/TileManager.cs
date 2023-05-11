@@ -38,11 +38,11 @@ public class TileManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1) && scanArea.IsPlayerSelected)
         {
-                DetectTileClick(isOrigin: false);
-                scanArea.DrawPath(tilePosition);
+            DetectTileClick(isOrigin: false);
+            scanArea.DrawPath(tilePosition);
         }
 
-        if (scanArea.IsPlayerSelected && Input.GetKeyDown(KeyCode.Return)) { }
+        if (scanArea.IsPlayerSelected && Input.GetKeyDown(KeyCode.Return)) { scanArea.MovePlayer(); }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
