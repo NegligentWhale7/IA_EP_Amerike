@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float maxSteps;
     [SerializeField] Tilemap deMap, playerMap;
+    [SerializeField] Vector3 offset;
     public Tilemap tileMap;
     public float DelayTime;
     public TileBase TBase, playerSprite;
@@ -167,6 +168,7 @@ public class Player : MonoBehaviour
         for (int i = _pathNodes.Count - 1; i >= 0; i--)
         {
             playerMap.SetTile(_pathNodes[i], playerSprite);
+            playerMap.SetTransformMatrix(_pathNodes[i], Matrix4x4.TRS(offset, Quaternion.Euler(0, 0, 0), Vector3.one));
             await Task.Delay(1000);
             if (i != 0)
             {
@@ -185,5 +187,6 @@ public class Player : MonoBehaviour
         _cameFrom.Clear();
         _costSoFar.Clear();
         _oldTile.Clear();
+        _pathNodes.Clear();
     }
 }

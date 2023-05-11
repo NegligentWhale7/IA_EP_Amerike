@@ -17,6 +17,7 @@ public class TileManager : MonoBehaviour
     private Dictionary<Tilemap, Vector3Int> _origin = new Dictionary<Tilemap, Vector3Int>();
     private Dictionary<Tilemap, Vector3Int> _goal = new Dictionary<Tilemap, Vector3Int>();
     private Vector3Int tilePosition;
+    private bool _isPlayerSelected = false;
 
     private void Start()
     {
@@ -26,7 +27,14 @@ public class TileManager : MonoBehaviour
 
     private void Update()
     {
-        if (!scanArea.IsPlayerSelected) SelectTile();
+        if (!_isPlayerSelected) SelectTile();
+        ManageTroupe();
+    }
+
+
+    private void ManageTroupe()
+    {
+        
 
         if (Input.GetMouseButtonDown(0) && !scanArea.IsPlayerSelected)
         {
@@ -50,8 +58,6 @@ public class TileManager : MonoBehaviour
             scanArea.ClearTiles();
         }
     }
-
-
     private void SelectTile()
     {
         Vector3 mousePosition = main.ScreenToWorldPoint(Input.mousePosition);
