@@ -7,19 +7,21 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Threading.Tasks;
 
-public class Infantery : MonoBehaviour
+public class Character : MonoBehaviour
 {
-    public float maxSteps;
     [SerializeField] Tilemap deMap;
     [SerializeField] Vector3 offset;
+    public float lavaCost, waterCost, rockCost, snowCost, iceCost;
+    public float maxSteps;
+    public Tilemap playerTile;
     public Tilemap tileMap;
     public float DelayTime;
     public TileBase TBase, playerSprite;
     public TileBase visitedTile, pathTile;
     public bool IsPlayerSelected = false;
+    public TileManager ts;
     public Vector3 Goal { get; set; }
     public Vector3 Origin { get; set; }
-    public TileManager ts;
 
     private PriorityQueue<Vector3> _frontier = new PriorityQueue<Vector3>();
     private Dictionary<Vector3, Vector3> _cameFrom = new Dictionary<Vector3, Vector3>();
@@ -65,19 +67,11 @@ public class Infantery : MonoBehaviour
         var nextTile = tileMap.GetTile(new Vector3Int((int)next.x, (int)next.y, (int)next.z));
         double cost = nextTile.name switch
         {
-            "ground_grass" => 1,
-            "ground_asphalt" => 400,
-            "road_t_a" => 500,
-            "road_straight_a" => 500,
-            "road_straight_b" => 500,
-            "road_end_c" => 500,
-            "road_t_c" => 500,
-            "road_end_d" => 500,
-            "road_end_a" => 500,
-            "road_end_b" => 500,
-            "crops_plowed_growth" => 200,
-            "ground_water" => 300,
-            
+            "isometric_angled_pixel_0036" => lavaCost,
+            "isometric_angled_pixel_0059" => waterCost,
+            "isometric_angled_pixel_0035" => iceCost,
+            "isometric_angled_pixel_0043" => snowCost,
+            "isometric_angled_pixel_0064" => rockCost,
             _ => 1
         };
 
@@ -110,7 +104,6 @@ public class Infantery : MonoBehaviour
 
         coordList.Add(nextInt);
         deMap.SetTile(nextInt, TBase);
-        //tileMap.SetTile(nextInt, TBase);
     }
 
 
@@ -142,7 +135,6 @@ public class Infantery : MonoBehaviour
             }
             if (!deMap.HasTile(currentInt)) { return; }
             deMap.SetTile(currentInt, pathTile);
-            // playerMap.SetTile(currentInt, playerSprite);
             _pathNodes.Add(currentInt);
             current = _cameFrom[current];
 
@@ -157,15 +149,11 @@ public class Infantery : MonoBehaviour
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int cellPosition = ts.infantery.WorldToCell(new Vector3(mousePosition.x, mousePosition.y, 0f));
         Goal = cellPosition;
-        // current = _cameFrom[Goal];
         Vector3Int currentInt = new Vector3Int((int)current.x, (int)current.y, (int)current.z);
-
         int indexNodes = _pathNodes.Count - 1;
         Vector3Int newVi = _pathNodes[indexNodes];
-        //  playerMap.SetTile(newVi, playerSprite);
 
         Move();
-        //playerMap.SetTile(cellPosition, playerSprite);
 
     }
 
@@ -174,12 +162,13 @@ public class Infantery : MonoBehaviour
     {
         for (int i = _pathNodes.Count - 1; i >= 0; i--)
         {
-            ts.infantery.SetTile(_pathNodes[i], playerSprite);
-            ts.infantery.SetTransformMatrix(_pathNodes[i], Matrix4x4.TRS(offset, Quaternion.Euler(0, 0, 0), Vector3.one));
+            playerTile.ClearAllTiles();
+            playerTile.SetTile(_pathNodes[i], playerSprite);
+            playerTile.SetTransformMatrix(_pathNodes[i], Matrix4x4.TRS(offset, Quaternion.Euler(0, 0, 0), Vector3.one));
             await Task.Delay(1000);
             if (i != 0)
             {
-                ts.infantery.ClearAllTiles();
+                playerTile.ClearAllTiles();
             }
         }
     }

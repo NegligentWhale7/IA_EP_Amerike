@@ -442,16 +442,6 @@ Tilemap:
   m_GameObject: {fileID: 800024324}
   m_Enabled: 1
   m_Tiles:
-  - first: {x: -4, y: -18, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   - first: {x: -13, y: 1, z: 0}
     second:
       serializedVersion: 2
@@ -464,17 +454,17 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: cf7661b190a47ba42abd46d49f4542ee, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 7fcf0596aa6e4ba45bbc89258af97be5, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 06a287cc97cb64df8a11af10f2352365, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 7cefe9e9e8c984bbd9ff43235be8f54f, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data:
       e00: 1
       e01: 0
@@ -511,7 +501,7 @@ Tilemap:
       e32: 3.6e-44
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -684,16 +674,6 @@ Tilemap:
   m_GameObject: {fileID: 1432851905}
   m_Enabled: 1
   m_Tiles:
-  - first: {x: -4, y: -18, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   - first: {x: -21, y: -7, z: 0}
     second:
       serializedVersion: 2
@@ -706,8 +686,8 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: cf7661b190a47ba42abd46d49f4542ee, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 1
@@ -715,29 +695,29 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 06a287cc97cb64df8a11af10f2352365, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 04562bc13a2407e40ae370dad404125b, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 1
+  - m_RefCount: 0
     m_Data:
-      e00: 1
+      e00: -1.1048784e-18
       e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0.15
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
+      e02: -1.1020282e-38
+      e03: -1.1020282e-38
+      e10: 9.08e-43
+      e11: 0
+      e12: 9.08e-43
+      e13: 9.08e-43
+      e20: -8.1336977e-22
+      e21: 1e-45
+      e22: 4.584072e-29
+      e23: 4.7561155e-10
+      e30: 4.5905e-41
       e31: 0
-      e32: 0
-      e33: 1
+      e32: 9.1e-43
+      e33: 9.12e-43
   - m_RefCount: 1
     m_Data:
       e00: 0.5
@@ -757,7 +737,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -1028,7 +1008,7 @@ Tilemap:
   m_GameObject: {fileID: 1686129217}
   m_Enabled: 1
   m_Tiles:
-  - first: {x: -4, y: 1, z: 0}
+  - first: {x: 2, y: 3, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 0
@@ -1070,8 +1050,8 @@ Tilemap:
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -10, y: 0, z: 0}
-  m_Size: {x: 10, y: 2, z: 1}
+  m_Origin: {x: -11, y: -2, z: 0}
+  m_Size: {x: 14, y: 6, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -20232,9 +20212,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0b5042300083346bd32fa8a7bc35e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSteps: 80
   deMap: {fileID: 540146949}
   offset: {x: 0, y: 0.15, z: 0}
+  lavaCost: 0
+  waterCost: 0
+  rockCost: 0
+  snowCost: 0
+  iceCost: 0
+  maxSteps: 80
+  playerTile: {fileID: 0}
   tileMap: {fileID: 1692038709}
   DelayTime: 0.00001
   TBase: {fileID: 11400000, guid: 8261e14034d70614eac3614c7d80fe61, type: 2}
@@ -20254,6 +20240,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1800002812}
   - component: {fileID: 1800002813}
+  - component: {fileID: 1800002816}
+  - component: {fileID: 1800002815}
+  - component: {fileID: 1800002814}
   m_Layer: 0
   m_Name: TileM
   m_TagString: Untagged
@@ -20290,13 +20279,105 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   main: {fileID: 519420031}
   grid: {fileID: 1734272385}
+  originTile: {fileID: 11400000, guid: 15a984361b9f2014587306e7b8a856f4, type: 2}
+  destinyTile: {fileID: 11400000, guid: f57c21110b0143949ad2f1e87a0cd9d3, type: 2}
   tileMap: {fileID: 1692038709}
+  offset: {x: 0, y: 0.02, z: 0}
+  scanArea: {fileID: 1734272387}
   infantery: {fileID: 1686129220}
   tank: {fileID: 1684102025}
   reconocimiento: {fileID: 800024327}
   Caballeria: {fileID: 1432851908}
-  offset: {x: 0, y: 0.02, z: 0}
+  playerSprite: {fileID: 11400000, guid: a4da069403597c54a837d900e5f6651c, type: 2}
+  treeSprite: {fileID: 11400000, guid: cf7661b190a47ba42abd46d49f4542ee, type: 2}
+  bearSprite: {fileID: 11400000, guid: 7fcf0596aa6e4ba45bbc89258af97be5, type: 2}
+  slimeSprite: {fileID: 11400000, guid: 3fc3e3f3ecb76ce4ea0696a6842e4f93, type: 2}
+  tb: {fileID: 0}
+  _characterType: 0
+--- !u!114 &1800002814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800002810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 251dcd484a03dd841aa4e66075ff92a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  main: {fileID: 519420031}
+  grid: {fileID: 1734272385}
   originTile: {fileID: 11400000, guid: 15a984361b9f2014587306e7b8a856f4, type: 2}
   destinyTile: {fileID: 11400000, guid: f57c21110b0143949ad2f1e87a0cd9d3, type: 2}
-  tb: {fileID: 0}
+  tileMap: {fileID: 1692038709}
+  offset: {x: 0, y: 0.02, z: 0}
   scanArea: {fileID: 1734272387}
+  infantery: {fileID: 1686129220}
+  tank: {fileID: 1684102025}
+  reconocimiento: {fileID: 800024327}
+  Caballeria: {fileID: 1432851908}
+  playerSprite: {fileID: 11400000, guid: a4da069403597c54a837d900e5f6651c, type: 2}
+  treeSprite: {fileID: 11400000, guid: cf7661b190a47ba42abd46d49f4542ee, type: 2}
+  bearSprite: {fileID: 11400000, guid: 7fcf0596aa6e4ba45bbc89258af97be5, type: 2}
+  slimeSprite: {fileID: 11400000, guid: 3fc3e3f3ecb76ce4ea0696a6842e4f93, type: 2}
+  tb: {fileID: 0}
+  _characterType: 3
+--- !u!114 &1800002815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800002810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 251dcd484a03dd841aa4e66075ff92a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  main: {fileID: 519420031}
+  grid: {fileID: 1734272385}
+  originTile: {fileID: 11400000, guid: 15a984361b9f2014587306e7b8a856f4, type: 2}
+  destinyTile: {fileID: 11400000, guid: f57c21110b0143949ad2f1e87a0cd9d3, type: 2}
+  tileMap: {fileID: 1692038709}
+  offset: {x: 0, y: 0.02, z: 0}
+  scanArea: {fileID: 1734272387}
+  infantery: {fileID: 1686129220}
+  tank: {fileID: 1684102025}
+  reconocimiento: {fileID: 800024327}
+  Caballeria: {fileID: 1432851908}
+  playerSprite: {fileID: 11400000, guid: a4da069403597c54a837d900e5f6651c, type: 2}
+  treeSprite: {fileID: 11400000, guid: cf7661b190a47ba42abd46d49f4542ee, type: 2}
+  bearSprite: {fileID: 11400000, guid: 7fcf0596aa6e4ba45bbc89258af97be5, type: 2}
+  slimeSprite: {fileID: 11400000, guid: 3fc3e3f3ecb76ce4ea0696a6842e4f93, type: 2}
+  tb: {fileID: 0}
+  _characterType: 2
+--- !u!114 &1800002816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800002810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 251dcd484a03dd841aa4e66075ff92a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  main: {fileID: 519420031}
+  grid: {fileID: 1734272385}
+  originTile: {fileID: 11400000, guid: 15a984361b9f2014587306e7b8a856f4, type: 2}
+  destinyTile: {fileID: 11400000, guid: f57c21110b0143949ad2f1e87a0cd9d3, type: 2}
+  tileMap: {fileID: 1692038709}
+  offset: {x: 0, y: 0.02, z: 0}
+  scanArea: {fileID: 1734272387}
+  infantery: {fileID: 1686129220}
+  tank: {fileID: 1684102025}
+  reconocimiento: {fileID: 800024327}
+  Caballeria: {fileID: 1432851908}
+  playerSprite: {fileID: 11400000, guid: a4da069403597c54a837d900e5f6651c, type: 2}
+  treeSprite: {fileID: 11400000, guid: cf7661b190a47ba42abd46d49f4542ee, type: 2}
+  bearSprite: {fileID: 11400000, guid: 7fcf0596aa6e4ba45bbc89258af97be5, type: 2}
+  slimeSprite: {fileID: 11400000, guid: 3fc3e3f3ecb76ce4ea0696a6842e4f93, type: 2}
+  tb: {fileID: 0}
+  _characterType: 1
